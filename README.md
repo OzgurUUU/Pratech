@@ -1,7 +1,61 @@
-🚀 Pratech Personel İzin Yönetim SistemiBu proje, Pratech Yazılım stajyer görev paketi kapsamında geliştirilmiş; personellerin izin talebi oluşturabildiği, yöneticilerin ise bu talepleri gerçek zamanlı (Real-time) olarak yönetebildiği modern bir Fullstack uygulamadır.🌌 Mimari ve TemaUygulama, kurumsal yazılım standartlarına uygun olarak tasarlanmış ve Midnight Slate (derin antrasit ve indigo) dark tema paletiyle görselleştirilmiştir. Kullanıcı deneyimini (UX) artırmak adına Personnel (Talep Formu) ve Admin (Yönetim Paneli) ekranları Angular Routing ile birbirinden ayrılmıştır.🛠️ Teknik YetkinliklerBackend (NestJS & SQLite)Real-time Haberleşme: Socket.io entegrasyonu sayesinde yeni bir talep geldiğinde tüm bağlı admin panelleri sayfa yenilemeden güncellenir.Veri Güvenliği & Validasyon: class-validator ve ValidationPipe kullanılarak, eksik veya hatalı verilerin veritabanına girişi hem DTO seviyesinde hem de 400 Bad Request hata yönetimiyle engellenmiştir.Kalıcı Veri: SQLite veritabanı ile hafif ve taşınabilir bir veri saklama yapısı kurulmuştur.Frontend (Angular & Tailwind CSS)Modern Routing: /talep-olustur ve /yönetici-paneli rotalarıyla temiz bir sayfa yapısı sağlanmıştır.Reaktif Formlar: Karmaşık form validasyonları ve "Başlangıç tarihi bitişten sonra olamaz" gibi özel mantıksal kontroller uygulanmıştır.Lokalizasyon: DatePipe ve Angular Locale (tr) entegrasyonu ile tarihler "25 Nisan 2026" formatında profesyonelce sunulur.Responsive Tasarım: Tailwind CSS v3 kullanılarak mobil ve masaüstü uyumlu arayüz geliştirilmiştir.🚀 Kurulum ve Çalıştırma1. Backend KurulumuBashcd pratech-backend
+# 🚀 Pratech Personel İzin Yönetim Sistemi
+
+Bu proje, **Pratech Yazılım stajyer görev paketi** kapsamında geliştirilmiş; personellerin izin talebi oluşturabildiği, yöneticilerin ise bu talepleri **gerçek zamanlı (real-time)** olarak yönetebildiği modern bir **Fullstack uygulamadır.**
+
+---
+
+## 🌌 Mimari ve Tema
+
+Uygulama, kurumsal yazılım standartlarına uygun olarak tasarlanmış ve **Midnight Slate** (derin antrasit & indigo) dark tema paletiyle görselleştirilmiştir.
+
+Kullanıcı deneyimini artırmak için:
+- **Personnel (Talep Formu)**
+- **Admin (Yönetim Paneli)**
+
+ekranları **Angular Routing** ile ayrılmıştır.
+
+---
+
+## 🛠️ Teknik Yetkinlikler
+
+### 🔧 Backend (NestJS & SQLite)
+
+- ⚡ **Real-time Haberleşme**  
+  Socket.io entegrasyonu sayesinde yeni bir talep geldiğinde tüm admin panelleri **sayfa yenilenmeden güncellenir**.
+
+- 🔐 **Veri Güvenliği & Validasyon**  
+  `class-validator` ve `ValidationPipe` kullanılarak hatalı/veri eksik girişleri engellenir.  
+  Hatalı isteklerde **400 Bad Request** döndürülür.
+
+- 💾 **Kalıcı Veri**  
+  Hafif ve taşınabilir yapı için **SQLite** veritabanı kullanılmıştır.
+
+---
+
+### 🎨 Frontend (Angular & Tailwind CSS)
+
+- 🧭 **Modern Routing**  
+  - `/talep-olustur`
+  - `/yonetici-paneli`
+
+- 🧠 **Reaktif Formlar**  
+  Gelişmiş validasyonlar:
+  - "Başlangıç tarihi bitişten sonra olamaz" gibi özel kontroller
+
+- 🌍 **Lokalizasyon**  
+  Tarihler Angular `DatePipe` ve `tr` locale ile:  
+  👉 **25 Nisan 2026** formatında gösterilir
+
+- 📱 **Responsive Tasarım**  
+  Tailwind CSS v3 ile mobil ve masaüstü uyumlu arayüz
+
+---
+
+## 🚀 Kurulum ve Çalıştırma
+
+### 1️⃣ Backend Kurulumu
+
+```bash
+cd pratech-backend
 npm install
 npm run start:dev
-Sunucu varsayılan olarak http://localhost:3000 portunda ayağa kalkacaktır.2. Frontend KurulumuBashcd pratech-frontend
-npm install
-ng serve
-Uygulama http://localhost:4200 adresinde yayına girecektir.📡 API EndpointsMetotRotaAçıklamaPOST/leave/izin-talepYeni izin talebi oluşturur (Validasyon kontrollü).GET/leave/izinlerTüm izin taleplerini listeler.PUT/leave/izinler/:id/statusTalebi onayla/reddet (Real-time sinyal tetikler).DELETE/leave/izinler/:idTalebi kalıcı olarak siler (Bonus Özellik).📂 Dosya İçeriğitask1.pdf: Restoran zincirleri üzerine yapılan sektör araştırması ve ürün brief'i.pratech-backend: NestJS kaynak kodları, Socket.io Gateway ve SQLite DB.pratech-frontend: Angular Standalone bileşenler ve Midnight Slate CSS yapılandırması.Geliştiren: Özgür ÜçdağPozisyon: Fullstack Yazılım Stajyer Adayı
