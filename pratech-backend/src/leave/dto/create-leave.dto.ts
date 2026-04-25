@@ -2,18 +2,18 @@ import { IsDateString, IsNotEmpty, IsOptional, IsString } from "class-validator"
 
 export class CreateLeaveDto {
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message: 'Ad ve soyad alanı boş bırakılamaz.'})
     fullName: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message: 'İzin türü alanı boş bırakılamaz.'})
     leaveType: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message: 'Başlangıç tarihi alanı boş bırakılamaz.'})
     @IsDateString()
     startDate: Date;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message: 'Bitiş tarihi alanı boş bırakılamaz.'})
     @IsDateString()
     endDate: Date;
 

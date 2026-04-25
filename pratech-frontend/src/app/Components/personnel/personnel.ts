@@ -36,7 +36,9 @@ export class PersonnelComponent {
 
   onSubmit() {
   this.submitted = true;
-  if (this.leaveForm.valid) {
+  if (this.leaveForm.invalid) {
+    return;
+  }
     this.leaveService.createLeave(this.leaveForm.value).subscribe({
       next: () => {
         alert('Talebiniz başarıyla oluşturuldu!');
@@ -44,8 +46,7 @@ export class PersonnelComponent {
         this.leaveForm.reset({ leaveType: 'Yıllık İzin' });
         this.submitted = false;
       },
-      error: (err) => alert('Hata: ' + err.error.message)
+      error: (err) => alert('Hata: ' + err.error.message || 'Talep oluşturulurken bir hata oluştu.')
     });
-  }
 }
 }
