@@ -103,48 +103,58 @@ Pratech/
 ---
 
 ## 🚀 Kurulum ve Çalıştırma
-
+ 
 ### Gereksinimler
-
+ 
 - [Node.js](https://nodejs.org/) v18+
 - [Angular CLI](https://angular.io/cli) v17+
-
 ---
-
+ 
 ### 1️⃣ Backend Kurulumu
-
+ 
 ```bash
 cd pratech-backend
 npm install
 npm run start:dev
 ```
-
+ 
 Sunucu varsayılan olarak `http://localhost:3000` adresinde çalışır.
-
+ 
+Başlıca bağımlılıklar `npm install` ile otomatik yüklenir:
+ 
+- `@nestjs/core`, `@nestjs/common`, `@nestjs/platform-express`
+- `@nestjs/websockets`, `@nestjs/platform-socket.io` — Socket.io desteği
+- `better-sqlite3` — SQLite veritabanı
+- `class-validator`, `class-transformer` — DTO validasyonu
 ---
-
+ 
 ### 2️⃣ Frontend Kurulumu
-
+ 
 ```bash
 cd pratech-frontend
 npm install
 ng serve
 ```
-
+ 
 Uygulama `http://localhost:4200` adresinde açılır.
-
+ 
+Başlıca bağımlılıklar `npm install` ile otomatik yüklenir:
+ 
+- `@angular/core`, `@angular/forms`, `@angular/router`
+- `socket.io-client` — gerçek zamanlı sunucu bağlantısı
+- `tailwindcss`, `postcss`, `autoprefixer` — CSS kütüphanesi
 ---
-
+ 
 ## 🌐 API Uç Noktaları
-
+ 
 | Method | Endpoint | Açıklama |
 |--------|----------|----------|
 | `GET` | `/api/izinler` | Tüm izin taleplerini listeler |
 | `POST` | `/api/izinler` | Yeni izin talebi oluşturur |
 | `PATCH` | `/api/izinler/:id` | Talebi onayla / reddet |
-
+ 
 ### Örnek İstek Gövdesi (`POST /api/izinler`)
-
+ 
 ```json
 {
   "ad": "Ahmet Yılmaz",
@@ -153,30 +163,28 @@ Uygulama `http://localhost:4200` adresinde açılır.
   "izinTuru": "Yıllık İzin"
 }
 ```
-
+ 
 ---
-
+ 
 ## 🖥️ Uygulama Ekranları
-
+ 
 ### `/talep-olustur` — Personel İzin Talebi Formu
-
+ 
 - Personel adı, izin türü ve tarih aralığı girişi
 - Reactive form ile anlık doğrulama (başlangıç > bitiş kontrolü)
 - Başarılı gönderim sonrası admin paneli otomatik güncellenir
-
 ### `/yonetici-paneli` — Admin Yönetim Paneli
-
+ 
 - Bekleyen / onaylanan / reddedilen taleplerin listelenmesi
 - Socket.io ile gerçek zamanlı güncelleme (sayfa yenilemesiz)
 - Tek tıkla onay / red işlemi
-
 ---
-
+ 
 ## 👨‍💻 Geliştirici
-
+ 
 **Özgür Üçdağ**
 [github.com/OzgurUUU](https://github.com/OzgurUUU)
-
+ 
 ---
-
+ 
 > Bu proje **Pratech Yazılım** stajyer görev paketi kapsamında geliştirilmiştir.
