@@ -51,7 +51,9 @@ Pratech, personellerin izin talebinde bulunabildiği ve yöneticilerin bu talepl
 | **Socket.io Client** | Gerçek zamanlı sunucu bağlantısı |
 
 ---
+## 🎬 Demo
 
+![Demo](Trailer.gif)
 ## 📁 Proje Yapısı
 
 ```
