@@ -8,6 +8,7 @@ Pratech, personellerin izin talebinde bulunabildiği ve yöneticilerin bu talepl
 
 - [Özellikler](#-özellikler)
 - [Teknoloji Yığını](#️-teknoloji-yığını)
+- [Demo](#-demo)
 - [Proje Yapısı](#-proje-yapısı)
 - [Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
 - [API Uç Noktaları](#-api-uç-noktaları)
