@@ -27,7 +27,7 @@ export class LeaveService {
   }
 
   async findAll(): Promise<Leave[]> {
-    return this.leaveRepository.find({ order: { id: 'DESC' } }); 
+    return this.leaveRepository.find({ order: { id: 'DESC' } });
   }
 
   async findOne(id: number): Promise<Leave> {
@@ -35,16 +35,19 @@ export class LeaveService {
   }
 
   async updateStatus(id: number, status: string): Promise<Leave> {
-    const leave = await this.leaveRepository.findOneBy({ id });
+    const leave = await this.leaveRepository.findOne({ where: { id } });
     if (!leave) {
       throw new NotFoundException('İzin talebi bulunamadı.');
     }
 
-    if (status !== 'Approved' && status !== 'Rejected') {
-      throw new BadRequestException('Durum sadece "Approved" veya "Rejected" olabilir.');
+    if (status !== 'Onaylandı' && status !== 'Reddedildi') {
+      throw new BadRequestException('Durum sadece "Onaylandı" veya "Reddedildi" olabilir.');
     }
 
     leave.status = status;
     return this.leaveRepository.save(leave);
+  }
+  async remove(id: number): Promise<void> {
+    await this.leaveRepository.delete(id);
   }
 }

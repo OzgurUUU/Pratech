@@ -12,10 +12,15 @@ import { Leave, LeaveService } from '../../Service/leave';
 export class AdminComponent implements OnInit {
   leaves: Leave[] = [];
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(private leaveService: LeaveService) { }
 
   ngOnInit() {
     this.loadLeaves();
+
+    // Servisten gelen yenileme sinyallerini dinle
+    this.leaveService.refresh$.subscribe(() => {
+      this.loadLeaves();
+    });
   }
 
   loadLeaves() {
@@ -36,4 +41,12 @@ export class AdminComponent implements OnInit {
       error: () => alert('Durum güncellenirken bir hata oluştu.')
     });
   }
+  onDelete(id: number) {
+  if (confirm('Bu talebi silmek istediğinize emin misiniz?')) {
+    this.leaveService.deleteLeave(id).subscribe({
+      next: () => this.loadLeaves(),
+      error: () => alert('Silme işlemi başarısız.')
+    });
+  }
+}
 }

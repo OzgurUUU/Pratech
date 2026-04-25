@@ -21,4 +21,8 @@ export class LeaveController {
   updateStatus(@Param('id') id: string, @Body('status') status: string) {
     return this.leaveService.updateStatus(+id, status);
   }
+  @Delete('izinler/:id') // Rota: /leave/izinler/1
+  remove(@Param('id') id: string) {
+    return this.leaveService.remove(+id);
+  }
 }

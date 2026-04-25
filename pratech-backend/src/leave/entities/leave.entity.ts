@@ -19,7 +19,7 @@ export class Leave {
     @Column({ nullable: true })
     description: string;
 
-    @Column({default: 'Pending'})
-    status: string; // Pending, Approved, Rejected gibi durumlar için
+    @Column({default: 'Beklemede'})
+    status: string; // Beklemede, Onaylandı, Reddedildi
 
 }

@@ -35,16 +35,17 @@ export class PersonnelComponent {
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.leaveForm.valid) {
-      this.leaveService.createLeave(this.leaveForm.value).subscribe({
-        next: () => {
-          alert('Talebiniz başarıyla oluşturuldu!');
-          this.leaveForm.reset({ leaveType: 'Yıllık İzin' });
-          this.submitted = false;
-        },
-        error: (err) => alert('Hata: ' + err.error.message)
-      });
-    }
+  this.submitted = true;
+  if (this.leaveForm.valid) {
+    this.leaveService.createLeave(this.leaveForm.value).subscribe({
+      next: () => {
+        alert('Talebiniz başarıyla oluşturuldu!');
+        this.leaveService.triggerRefresh(); // ADMIN LİSTESİNE YENİLEME SİNYALİ GÖNDERİR
+        this.leaveForm.reset({ leaveType: 'Yıllık İzin' });
+        this.submitted = false;
+      },
+      error: (err) => alert('Hata: ' + err.error.message)
+    });
   }
+}
 }
