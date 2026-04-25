@@ -11,7 +11,7 @@ import { Leave, LeaveService } from '../../Service/leave';
 })
 export class AdminComponent implements OnInit {
   leaves: Leave[] = [];
-
+  showToast: boolean = false;
   constructor(private leaveService: LeaveService) { }
 
   ngOnInit() {
@@ -20,6 +20,7 @@ export class AdminComponent implements OnInit {
     // Servisten gelen yenileme sinyallerini dinle
     this.leaveService.refresh$.subscribe(() => {
       this.loadLeaves();
+      this.triggerNotification(); // Bildirimi tetikle
     });
   }
 
@@ -42,11 +43,17 @@ export class AdminComponent implements OnInit {
     });
   }
   onDelete(id: number) {
-  if (confirm('Bu talebi silmek istediğinize emin misiniz?')) {
-    this.leaveService.deleteLeave(id).subscribe({
-      next: () => this.loadLeaves(),
-      error: () => alert('Silme işlemi başarısız.')
-    });
+    if (confirm('Bu talebi silmek istediğinize emin misiniz?')) {
+      this.leaveService.deleteLeave(id).subscribe({
+        next: () => this.loadLeaves(),
+        error: () => alert('Silme işlemi başarısız.')
+      });
+    }
   }
-}
+  triggerNotification() {
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 4000); // 4000 milisaniye = 4 saniye
+  }
 }

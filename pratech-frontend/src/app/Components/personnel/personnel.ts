@@ -13,7 +13,7 @@ import { LeaveService } from '../../Service/leave';
 export class PersonnelComponent {
   leaveForm: FormGroup;
   submitted = false;
-
+  showToast: boolean = false;
   constructor(private fb: FormBuilder, private leaveService: LeaveService) {
     this.leaveForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -41,12 +41,19 @@ export class PersonnelComponent {
   }
     this.leaveService.createLeave(this.leaveForm.value).subscribe({
       next: () => {
-        alert('Talebiniz başarıyla oluşturuldu!');
+        
         this.leaveService.triggerRefresh(); // ADMIN LİSTESİNE YENİLEME SİNYALİ GÖNDERİR
         this.leaveForm.reset({ leaveType: 'Yıllık İzin' });
         this.submitted = false;
+        this.triggerNotification(); // Bildirimi tetikle
       },
       error: (err) => alert('Hata: ' + err.error.message || 'Talep oluşturulurken bir hata oluştu.')
     });
 }
+triggerNotification() {
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 4000); // 4000 milisaniye = 4 saniye
+  }
 }
