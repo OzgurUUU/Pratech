@@ -1,57 +1,115 @@
-# 🚀 Pratech Personel İzin Yönetim Sistemi
+# 🚀 Pratech — Personel İzin Yönetim Sistemi
 
-Bu proje, **Pratech Yazılım stajyer görev paketi** kapsamında geliştirilmiş; personellerin izin talebi oluşturabildiği, yöneticilerin ise bu talepleri **gerçek zamanlı (real-time)** olarak yönetebildiği modern bir **Fullstack uygulamadır.**
-
----
-
-## 🌌 Mimari ve Tema
-
-Uygulama, kurumsal yazılım standartlarına uygun olarak tasarlanmış ve **Midnight Slate** (derin antrasit & indigo) dark tema paletiyle görselleştirilmiştir.
-
-Kullanıcı deneyimini artırmak için:
-- **Personnel (Talep Formu)**
-- **Admin (Yönetim Paneli)**
-
-ekranları **Angular Routing** ile ayrılmıştır.
+Pratech, personellerin izin talebinde bulunabildiği ve yöneticilerin bu talepleri **gerçek zamanlı** olarak yönetip onaylayabildiği modern bir fullstack web uygulamasıdır. Pratech Yazılım stajyer görev paketi kapsamında geliştirilmiştir.
 
 ---
 
-## 🛠️ Teknik Yetkinlikler
+## 📋 İçindekiler
 
-### 🔧 Backend (NestJS & SQLite)
-
-- ⚡ **Real-time Haberleşme**  
-  Socket.io entegrasyonu sayesinde yeni bir talep geldiğinde tüm admin panelleri **sayfa yenilenmeden güncellenir**.
-
-- 🔐 **Veri Güvenliği & Validasyon**  
-  `class-validator` ve `ValidationPipe` kullanılarak hatalı/veri eksik girişleri engellenir.  
-  Hatalı isteklerde **400 Bad Request** döndürülür.
-
-- 💾 **Kalıcı Veri**  
-  Hafif ve taşınabilir yapı için **SQLite** veritabanı kullanılmıştır.
+- [Özellikler](#-özellikler)
+- [Teknoloji Yığını](#️-teknoloji-yığını)
+- [Demo](#-demo)
+- [Proje Yapısı](#-proje-yapısı)
+- [Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
+- [API Uç Noktaları](#-api-uç-noktaları)
+- [Uygulama Ekranları](#-uygulama-ekranları)
+- [Geliştirici](#-geliştirici)
 
 ---
 
-### 🎨 Frontend (Angular & Tailwind CSS)
+## ✨ Özellikler
 
-- 🧭 **Modern Routing**  
-  - `/talep-olustur`
-  - `/yonetici-paneli`
+- 📝 **İzin Talebi Oluşturma** — Personeller ad, tarih aralığı ve izin türü girerek kolayca talep oluşturabilir
+- ⚡ **Gerçek Zamanlı Bildirim** — Socket.io sayesinde yeni talepler admin paneline sayfa yenilenmeden anında yansır
+- ✅ **Talep Yönetimi** — Yöneticiler gelen talepleri onaylayabilir veya reddedebilir
+- 🔍 **Form Validasyonu** — Başlangıç tarihi bitiş tarihinden sonra olamaz gibi özel kontroller uygulanır; hatalı girişlerde `400 Bad Request` döner
+- 📱 **Responsive Tasarım** — Mobil ve masaüstü cihazlarda tam uyumlu arayüz
+- 🌙 **Dark Tema** — Midnight Slate (derin antrasit & indigo) renk paleti ile kurumsal görünüm
+- 🌍 **Türkçe Lokalizasyon** — Tarihler `25 Nisan 2026` formatında Türkçe gösterilir
 
-- 🧠 **Reaktif Formlar**  
-  Gelişmiş validasyonlar:
-  - "Başlangıç tarihi bitişten sonra olamaz" gibi özel kontroller
+---
 
-- 🌍 **Lokalizasyon**  
-  Tarihler Angular `DatePipe` ve `tr` locale ile:  
-  👉 **25 Nisan 2026** formatında gösterilir
+## 🛠️ Teknoloji Yığını
 
-- 📱 **Responsive Tasarım**  
-  Tailwind CSS v3 ile mobil ve masaüstü uyumlu arayüz
+### Backend
+
+| Teknoloji | Açıklama |
+|-----------|----------|
+| **Node.js** (CommonJS) | Sunucu tarafı çalışma ortamı |
+| **NestJS** | Modüler ve ölçeklenebilir Node.js çerçevesi |
+| **SQLite** | Hafif, taşınabilir ilişkisel veritabanı |
+| **Socket.io** | Gerçek zamanlı, çift yönlü iletişim |
+| **class-validator** | DTO tabanlı veri doğrulama ve `ValidationPipe` |
+
+### Frontend
+
+| Teknoloji | Açıklama |
+|-----------|----------|
+| **Angular** | Bileşen tabanlı SPA çerçevesi |
+| **Tailwind CSS v3** | Utility-first CSS kütüphanesi |
+| **Angular Reactive Forms** | Gelişmiş form doğrulama |
+| **Angular DatePipe** (`tr` locale) | Türkçe tarih biçimlendirme |
+| **Socket.io Client** | Gerçek zamanlı sunucu bağlantısı |
+
+---
+## 🎬 Demo
+
+![Demo](Trailer.gif)
+## 📁 Proje Yapısı
+
+```
+Pratech/
+├── pratech-backend/                  # NestJS + SQLite sunucusu
+│   ├── src/
+│   │   ├── leave/                    # İzin modülü
+│   │   │   ├── dto/
+│   │   │   │   ├── create-leave.dto.ts   # Yeni talep DTO'su
+│   │   │   │   └── update-leave.dto.ts   # Güncelleme DTO'su
+│   │   │   ├── entities/
+│   │   │   │   └── leave.entity.ts       # Veritabanı entity'si
+│   │   │   ├── leave.controller.ts       # REST endpoint tanımları
+│   │   │   ├── leave.gateway.ts          # Socket.io gateway (real-time)
+│   │   │   ├── leave.module.ts           # Modül tanımı
+│   │   │   └── leave.service.ts          # İş mantığı katmanı
+│   │   ├── app.controller.ts
+│   │   ├── app.module.ts
+│   │   ├── app.service.ts
+│   │   └── main.ts
+│   ├── leaves.sqlite                 # SQLite veritabanı dosyası
+│   └── package.json
+│
+└── pratech-frontend/                 # Angular istemci uygulaması
+    ├── src/
+    │   ├── app/
+    │   │   ├── Components/
+    │   │   │   ├── admin/
+    │   │   │   │   ├── admin.html        # Admin yönetim paneli şablonu
+    │   │   │   │   └── admin.ts          # Admin bileşen mantığı
+    │   │   │   └── personnel/
+    │   │   │       ├── personnel.html    # İzin talebi formu şablonu
+    │   │   │       └── personnel.ts      # Personel bileşen mantığı
+    │   │   ├── Service/
+    │   │   │   └── leave.ts             # HTTP + Socket.io servis katmanı
+    │   │   ├── app.config.ts
+    │   │   ├── app.routes.ts
+    │   │   └── app.ts
+    │   ├── index.html
+    │   ├── main.ts
+    │   └── styles.css
+    ├── tailwind.config.js
+    └── package.json
+```
 
 ---
 
 ## 🚀 Kurulum ve Çalıştırma
+
+### Gereksinimler
+
+- [Node.js](https://nodejs.org/) v18+
+- [Angular CLI](https://angular.io/cli) v17+
+
+---
 
 ### 1️⃣ Backend Kurulumu
 
@@ -59,3 +117,66 @@ ekranları **Angular Routing** ile ayrılmıştır.
 cd pratech-backend
 npm install
 npm run start:dev
+```
+
+Sunucu varsayılan olarak `http://localhost:3000` adresinde çalışır.
+
+---
+
+### 2️⃣ Frontend Kurulumu
+
+```bash
+cd pratech-frontend
+npm install
+ng serve
+```
+
+Uygulama `http://localhost:4200` adresinde açılır.
+
+---
+
+## 🌐 API Uç Noktaları
+
+| Method | Endpoint | Açıklama |
+|--------|----------|----------|
+| `GET` | `/api/izinler` | Tüm izin taleplerini listeler |
+| `POST` | `/api/izinler` | Yeni izin talebi oluşturur |
+| `PATCH` | `/api/izinler/:id` | Talebi onayla / reddet |
+
+### Örnek İstek Gövdesi (`POST /api/izinler`)
+
+```json
+{
+  "ad": "Ahmet Yılmaz",
+  "baslangicTarihi": "2026-05-01",
+  "bitisTarihi": "2026-05-05",
+  "izinTuru": "Yıllık İzin"
+}
+```
+
+---
+
+## 🖥️ Uygulama Ekranları
+
+### `/talep-olustur` — Personel İzin Talebi Formu
+
+- Personel adı, izin türü ve tarih aralığı girişi
+- Reactive form ile anlık doğrulama (başlangıç > bitiş kontrolü)
+- Başarılı gönderim sonrası admin paneli otomatik güncellenir
+
+### `/yonetici-paneli` — Admin Yönetim Paneli
+
+- Bekleyen / onaylanan / reddedilen taleplerin listelenmesi
+- Socket.io ile gerçek zamanlı güncelleme (sayfa yenilemesiz)
+- Tek tıkla onay / red işlemi
+
+---
+
+## 👨‍💻 Geliştirici
+
+**Özgür Üçdağ**
+[github.com/OzgurUUU](https://github.com/OzgurUUU)
+
+---
+
+> Bu proje **Pratech Yazılım** stajyer görev paketi kapsamında geliştirilmiştir.
