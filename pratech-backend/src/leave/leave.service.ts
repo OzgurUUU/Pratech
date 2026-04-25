@@ -4,6 +4,7 @@ import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Leave } from './entities/leave.entity';
 import { Repository } from 'typeorm';
+import { LeaveGateway } from './leave.gateway';
 
 
 @Injectable()
@@ -11,18 +12,20 @@ export class LeaveService {
   /**
    *
    */
-  constructor(@InjectRepository(Leave) private leaveRepository: Repository<Leave>) {
+  constructor(
+    @InjectRepository(Leave) private leaveRepository: Repository<Leave>,
+    private readonly leaveGateway: LeaveGateway) {
   }
   async create(createLeaveDto: CreateLeaveDto) {
     const start = new Date(createLeaveDto.startDate);
     const end = new Date(createLeaveDto.endDate);
-
 
     if (start > end) {
       throw new BadRequestException('Başlangıç tarihi bitiş tarihinden sonra olamaz.');
     }
 
     const newLeave = this.leaveRepository.create(createLeaveDto);
+    this.leaveGateway.emitRefresh();
     return this.leaveRepository.save(newLeave);
   }
 

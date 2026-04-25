@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { io } from 'socket.io-client';
 
 export interface Leave {
   id?: number;
@@ -19,7 +20,12 @@ export class LeaveService {
   private apiUrl = 'http://localhost:3000'; // NestJS portumuz
   private refreshSubject = new Subject<void>();
   refresh$ = this.refreshSubject.asObservable();
-  constructor(private http: HttpClient) {}
+  private socket = io('http://localhost:3000');
+  constructor(private http: HttpClient) {
+    this.socket.on('refresh_data', () => {
+      this.refreshSubject.next();
+    });
+  }
   triggerRefresh() {
     this.refreshSubject.next();
   }

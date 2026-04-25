@@ -15,7 +15,7 @@ import { Leave } from './leave/entities/leave.entity';
 })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,],
 })
 export class AppModule {
   
