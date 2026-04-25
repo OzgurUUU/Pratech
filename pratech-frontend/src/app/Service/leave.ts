@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Leave {
+  id?: number;
+  fullName: string;
+  leaveType: string;
+  startDate: string;
+  endDate: string;
+  description?: string;
+  status?: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LeaveService {
+  private apiUrl = 'http://localhost:3000'; // NestJS portumuz
+
+  constructor(private http: HttpClient) {}
+
+  createLeave(leave: Leave): Observable<Leave> {
+    return this.http.post<Leave>(`${this.apiUrl}/leave/izin-talep`, leave);
+  }
+
+  getLeaves(): Observable<Leave[]> {
+    return this.http.get<Leave[]>(`${this.apiUrl}/leave/izinler`);
+  }
+
+  updateStatus(id: number, status: string): Observable<Leave> {
+    return this.http.put<Leave>(`${this.apiUrl}/leave/izin-durum/${id}`, { status });
+  }
+}

@@ -1,0 +1,40 @@
+<div class="max-w-4xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-6">Yönetici Paneli - İzin Talepleri</h2>
+  
+  <div class="bg-white shadow rounded">
+    <table class="w-full text-left">
+      <thead class="bg-gray-50 border-b">
+        <tr>
+          <th class="p-4">Personel</th>
+          <th class="p-4">Tür</th>
+          <th class="p-4">Tarih Aralığı</th>
+          <th class="p-4">Durum</th>
+          <th class="p-4 text-right">İşlem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves" class="border-b hover:bg-gray-50">
+          <td class="p-4">{{ leave.fullName }}</td>
+          <td class="p-4">{{ leave.leaveType }}</td>
+          <td class="p-4">
+            {{ leave.startDate | date:'dd MMMM yyyy':'':'tr' }} - 
+            {{ leave.endDate | date:'dd MMMM yyyy':'':'tr' }}
+          </td>
+          <td class="p-4">
+            <span [ngClass]="{
+              'text-yellow-600 bg-yellow-100': leave.status === 'Beklemede',
+              'text-green-600 bg-green-100': leave.status === 'Onaylandı',
+              'text-red-600 bg-red-100': leave.status === 'Reddedildi'
+            }" class="px-2 py-1 rounded text-sm">
+              {{ leave.status }}
+            </span>
+          </td>
+          <td class="p-4 text-right">
+            <button *ngIf="leave.status === 'Beklemede'" (click)="updateStatus(leave.id!, 'Onaylandı')" class="bg-green-500 text-white px-3 py-1 rounded mr-2 hover:bg-green-600">Onayla</button>
+            <button *ngIf="leave.status === 'Beklemede'" (click)="updateStatus(leave.id!, 'Reddedildi')" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Reddet</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
