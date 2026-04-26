@@ -54,7 +54,7 @@ Pratech, personellerin izin talebinde bulunabildiği ve yöneticilerin bu talepl
 ---
 ## 🎬 Demo
 
-![Demo](Trailer.gif)
+![Demo](Demo.gif)
 ## 📁 Proje Yapısı
 
 ```
