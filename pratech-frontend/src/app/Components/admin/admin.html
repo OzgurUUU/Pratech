@@ -21,6 +21,7 @@
           <th class="p-5 font-semibold">Tür</th>
           <th class="p-5 font-semibold">Tarih</th>
           <th class="p-5 font-semibold">Durum</th>
+          <th class="p-5 font-semibold">Açıklama</th>
           <th class="p-5 font-semibold text-right">Aksiyonlar</th>
         </tr>
       </thead>
@@ -29,10 +30,12 @@
           class="hover:bg-slate-800/40 transition-colors group">
           <td class="p-5 text-white font-medium">{{ leave.fullName }}</td>
           <td class="p-5 text-slate-300">{{ leave.leaveType }}</td>
+
           <td class="p-5 text-slate-400 text-sm">
             {{ leave.startDate | date:'dd MMM' }} - {{ leave.endDate |
             date:'dd MMM' }}
           </td>
+
           <td class="p-5">
             <span [ngClass]="{
               'bg-amber-500/10 text-amber-400 border-amber-500/20': leave.status === 'Pending',
@@ -44,6 +47,10 @@
                 [ngClass]="{'bg-amber-400': leave.status === 'Pending', 'bg-emerald-400': leave.status === 'Onaylandı', 'bg-rose-400': leave.status === 'Reddedildi'}"></span>
               {{ leave.status }}
             </span>
+          </td>
+          <td
+            class="p-5 text-slate-300 max-w-xs break-words whitespace-normal leading-relaxed">
+            {{ leave.description || "Açıklama girilmedi." }}
           </td>
           <td class="p-5 text-right flex justify-end gap-2">
             <button type="button" *ngIf="leave.status === 'Beklemede'"
